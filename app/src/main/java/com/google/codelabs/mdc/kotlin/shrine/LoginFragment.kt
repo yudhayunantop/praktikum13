@@ -18,15 +18,17 @@ class LoginFragment : Fragment() {
             inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.shr_login_fragment, container, false)
-        // Set an error if the password is less than 8 characters.
+        // Set error jika error kurang dari 8 karakter.
         view.next_button.setOnClickListener {
             if (!isPasswordValid(password_edit_text.text)) {
                 password_text_input.error = getString(R.string.shr_error_password)
             } else {
-                password_text_input.error = null // Clear the error
-                (activity as NavigationHost).navigateTo(ProductGridFragment(), false) // Navigate to the next Fragment
+                // Clear error
+                password_text_input.error = null
+                // Navigate ke fragment lain
+                (activity as NavigationHost).navigateTo(ProductGridFragment(), false)
             } }
-        // Clear the error once more than 8 characters are typed.
+        // Clear error saat lebih dari  8 karakter.
         view.password_edit_text.setOnKeyListener { _, _, _ ->
             if (isPasswordValid(password_edit_text.text)) {
                 password_text_input.error = null //Clear the error
@@ -35,6 +37,8 @@ class LoginFragment : Fragment() {
         }
         return view
     }
+
+//    Menghubungkan dengan fragment lain saat pw benar
     private fun isPasswordValid(text: Editable?): Boolean {
         return text != null && text.length >= 8
     }

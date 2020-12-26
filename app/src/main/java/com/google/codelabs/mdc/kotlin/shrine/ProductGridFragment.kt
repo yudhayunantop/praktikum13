@@ -21,14 +21,15 @@ class ProductGridFragment : Fragment() {
             inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment with the ProductGrid theme
         val view = inflater.inflate(R.layout.shr_product_grid_fragment, container, false)
-        // Set up the toolbar.
+        // Set up toolbar.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             view.product_grid.background = context?.getDrawable(R.drawable.shr_product_grid_background_shape)
         }
         (activity as AppCompatActivity).setSupportActionBar(view.app_bar)
         view.app_bar.setNavigationOnClickListener(NavigationIconClickListener(activity!!, view.product_grid))
-        // Set up the RecyclerView
+        // Set RecyclerView
         view.recycler_view.setHasFixedSize(true)
+        // Set grid menjadi geser vertikal
         val gridLayoutManager = GridLayoutManager(context, 2, RecyclerView.HORIZONTAL, false)
         gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
